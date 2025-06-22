@@ -1,8 +1,8 @@
-# Web-Game Site (*Insert Name Here*)
+# Web-Game Site (*ArithMemory*)
 
 This memory web game was created as part of the **SEG 3125: Analysis and Design of User Interfaces 2025** course!
 
-*Add Description Here*
+In **ArithMemory** you'll be presented with a sequence of numbers for your to memorise. These can be either just numbers or simple expressions. Then you will recall the sequence presented. How many sequences can you remember?
 
 🚀 Built with:
 

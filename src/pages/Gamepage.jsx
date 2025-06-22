@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
+import StartScreen from '../components/StartScreen';
 
 const Gamepage = () => {
 
@@ -158,7 +159,7 @@ const Gamepage = () => {
         switch(gameState) {
             case 'start':
                 return (
-                    <StartScreen />
+                    <StartScreen onStartGame={startGame} />
                 );
             case 'displaySequence':
                 return (

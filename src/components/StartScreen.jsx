@@ -1,8 +1,7 @@
 import React from 'react'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { FaPlay } from 'react-icons/fa'
+// import { Button } from "@/components/ui/Button"
 
-const Mainpage = () => {
+const StartScreen = ({ onStartGame }) => {
   return (
     <>
         {/* Main Container */}
@@ -70,7 +69,7 @@ const Mainpage = () => {
             {/* Start Button */}
             <div className='flex justify-center items-center'>
 
-                <FaPlay className='bg-[#69B578] text-white w-22 h-20 pt-3 pb-3 pr-3 pl-4 rounded-2xl'/>
+                <FaPlay onClick={onStartGame} className='bg-[#69B578] text-white w-22 h-20 pt-3 pb-3 pr-3 pl-4 rounded-2xl'/>
 
             </div>
 
@@ -80,4 +79,4 @@ const Mainpage = () => {
   )
 }
 
-export default Mainpage
+export default StartScreen

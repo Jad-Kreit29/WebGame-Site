@@ -24,7 +24,7 @@ const Mainpage = () => {
 
                     <Select>
 
-                        <SelectTrigger>
+                        <SelectTrigger className='w-[140px]'>
 
                             <SelectValue placeholder="Select a level"/>
 
@@ -48,7 +48,7 @@ const Mainpage = () => {
 
                     <Select>
 
-                        <SelectTrigger>
+                        <SelectTrigger className='w-[200px]'>
 
                             <SelectValue placeholder="Select the question Type"/>
 
@@ -67,14 +67,15 @@ const Mainpage = () => {
 
             </div>
 
+            {/* Start Button */}
             <div className='flex justify-center items-center'>
 
-                <FaPlay className='bg-[#69B578] text-white w-22 h-20 pt-2 pb-2 pr-2 pl-3 rounded-2xl'/>
+                <FaPlay className='bg-[#69B578] text-white w-22 h-20 pt-3 pb-3 pr-3 pl-4 rounded-2xl'/>
 
             </div>
 
-
         </div>
+
     </>
   )
 }

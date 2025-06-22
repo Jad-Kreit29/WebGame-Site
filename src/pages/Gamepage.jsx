@@ -6,7 +6,7 @@ const Gamepage = () => {
 
     /*  STATES  */
     // Game States: Start, displaySequence, playerResponse, win, fail
-    const [gameState, setGameState] = useState('Start'); // Stages of the game
+    const [gameState, setGameState] = useState('start'); // Stages of the game
     const [currentNumber, setCurrentNumber] = useState(''); // Currently displayed number
     const [currentNumberIndex, setCurrentNumberIndex] = useState(0); // Index of the number within the array
     const [questionSet, setQuestionSet] = useState([]); // Array of number for questions
@@ -15,28 +15,6 @@ const Gamepage = () => {
     const [result, setResult] = useState('');
 
     /*  FUNCTIONS  */
-
-    // MAIN FUNCTION
-    const startGame = useCallback((gameLevel, gameMode) => {
-
-        // Create an array that hold our number sequence, with the size depending on the difficulty selected.
-        const questionArray = Array.from({ length: gameLevel }, generateQuestion(gameMode));
-
-        // Convert our numbers from the array into strings to display
-        const stringedNumbers = questionArray.map(numStr => ({
-
-            display: numStr,
-            value: evaluateExpressions(numStr) // Evaluating expressions appropriately
-
-        }));
-        setGameState('displaySequence');
-        setQuestionSet(stringedNumbers);
-        setCurrentNumberIndex(0);
-        setPlayerAnswer('');
-        setHighScore(0);
-
-
-    }, [generateQuestion]);
 
     // Function that evaluates generated expressions
     const evaluateExpressions = (expression) => {
@@ -49,7 +27,7 @@ const Gamepage = () => {
             let result;
 
             // Loop through every part of the expression.
-            for (let i = 1; i < parts.length; i+=2) {
+            for (let i = 1; i < numberParts.length; i+=2) {
 
                 // Store the current operator and the next number of the expression (as a float)
                 const currentOperator = parts[i];
@@ -152,6 +130,28 @@ const Gamepage = () => {
         }
 
     };
+
+    // MAIN FUNCTION
+    const startGame = useCallback((gameLevel, gameMode) => {
+
+        // Create an array that hold our number sequence, with the size depending on the difficulty selected.
+        const questionArray = Array.from({ length: gameLevel }, generateQuestion(gameMode));
+
+        // Convert our numbers from the array into strings to display
+        const stringedNumbers = questionArray.map(numStr => ({
+
+            display: numStr,
+            value: evaluateExpressions(numStr) // Evaluating expressions appropriately
+
+        }));
+        setGameState('displaySequence');
+        setQuestionSet(stringedNumbers);
+        setCurrentNumberIndex(0);
+        setPlayerAnswer('');
+        setHighScore(0);
+
+
+    }, [generateQuestion]);
 
     // Render our screen depending on the game state
     const renderGameScreen = () => {

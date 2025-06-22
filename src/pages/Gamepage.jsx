@@ -1,7 +1,5 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 const Gamepage = () => {
 
@@ -12,7 +10,8 @@ const Gamepage = () => {
     const [currentNumberIndex, setCurrentNumberIndex] = useState(0); // Index of the number within the array
     const [questionSet, setQuestionSet] = useState([]); // Array of number for questions
     const [playerAnswer, setPlayerAnswer] = useState('') // Player input
-    const [highScore, setHighScore] = useState(0);
+    const [highScore, setHighScore] = useState(0); // Game's Score
+    const [result, setResult] = useState('');
 
     /*  FUNCTIONS  */
 
@@ -138,19 +137,46 @@ const Gamepage = () => {
         } else if (!isNaN(stringedAnswer) && stringedAnswer != questionSet[playerIndex]) {
 
             // Set the state to lose
-            setGameState("lose");
+            setResult(`Incorrect! The correct answer ws ${questionSet[playerIndex]}`);
+            setGameState("result");
 
         // If we reached the end of the array
         } else if (!isNaN(stringedAnswer) && stringedAnswer === questionSet[playerIndex] && playerIndex === questionSet.length) {
 
             // Set the state to win and increase high score
-            setGameState("win");
+            setResult("Correct!");
+            setGameState("result");
             setHighScore(prevHighScore => prevHighScore + 1);
 
         }
 
+    };
 
-    }
+    // Render our screen depending on the game state
+    const renderGameScreen = () => {
+
+        switch(gameState) {
+            case 'start':
+                return (
+                    <StartScreen />
+                );
+            case 'displaySequence':
+                return (
+                    <SequenceDisplay />
+                );
+            case 'playerResponse':
+                return (
+                    <ResponseScreen />
+                );
+            case 'result':
+                return (
+                    <ResultScreen />
+                )
+            default:
+                return null;
+        }
+
+    };
 
     // Using React Hook to display our number sequence from our array
     useEffect(() => {
@@ -184,24 +210,15 @@ const Gamepage = () => {
 
     }, [gameState, currentNumberIndex, questionSet]);
 
-    
-  // Page Rendering
-  return (
+    return (
 
+        <div className='flex flex-col items-center justify-center min-h-screen'>
 
-    <div>
+            {renderGameScreen()}
 
-        <h1>{currentNumber}</h1>
-        <Button onClick={startGame}>Start!</Button>
+        </div>
 
-    </div>
-
-
-  )
-
-
-
-
+    )
 
 }
 

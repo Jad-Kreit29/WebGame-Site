@@ -48,7 +48,7 @@ const StartScreen = ({ onStartGame }) => {
 
                     <Select>
 
-                        <SelectTrigger className='w-[200px]'>
+                        <SelectTrigger className='w-[220px]'>
 
                             <SelectValue placeholder="Select the question Type"/>
 
@@ -70,7 +70,7 @@ const StartScreen = ({ onStartGame }) => {
             {/* Start Button */}
             <div className='flex justify-center items-center'>
 
-                <FaPlay onClick={onStartGame} className='bg-[#69B578] text-white w-22 h-20 pt-3 pb-3 pr-3 pl-4 rounded-2xl'/>
+                <FaPlay onClick={onStartGame} cursor="pointer" className='bg-[#69B578] text-white w-22 h-20 pt-3 pb-3 pr-3 pl-4 rounded-2xl duration-150 ease-in-out hover:shadow-xl'/>
 
             </div>
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@components/ui/Input'
+import { Input } from '@/components/ui/Input'
 
 const ResponseScreen = ({ playerAnswer, onSubmitAnswer, score }) => {
   return (

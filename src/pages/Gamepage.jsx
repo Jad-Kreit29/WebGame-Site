@@ -14,7 +14,12 @@ const Gamepage = () => {
     const [questionSet, setQuestionSet] = useState([]); // Array of number for questions
     const [playerAnswer, setPlayerAnswer] = useState('') // Player input
     const [highScore, setHighScore] = useState(0); // Game's Score
-    const [result, setResult] = useState('');
+    const [result, setResult] = useState(0);
+
+    // Bonus Question States
+    const [bonusQuestion, setBonusQuestion] = useState('');
+    const [bonusAnswer, setBonusAnswer] = useState('');
+
 
     /*  FUNCTIONS  */
 
@@ -98,6 +103,42 @@ const Gamepage = () => {
         }
         
     }, [questionSet]);
+
+    // Function for generating a BONUS question (optional)
+    const generateBonusQuestion = useCallback(() => {
+
+        let questionType = Math.floor(Math.random() * 3);
+
+        let index1 = Math.floor(Math.random() * questionSet.length);
+        let index2;
+
+        do {
+            index2 = Math.floor(Math.random() * questionSet.length);
+        } while (index1 === index2);
+
+        const num1 = questionSet[index1];
+        const num2 = questionSet[index2];
+
+        // Additon
+        if (questionType === 0) {
+
+            setBonusQuestion(`What is digit #${index1 + 1} plus digit #${index2 + 1}?`);
+            setBonusAnswer(num1 + num2);
+
+        } else if (questionType === 1) {
+
+            setBonusQuestion(`What is digit #${index1 + 1} minus digit #${index2 + 1}?`);
+            setBonusAnswer(num1 - num2);
+
+        } else if (questionType === 2) {
+
+            setBonusQuestion(`What is digit #${index1 + 1} times digit #${index2 + 1}?`);
+            setBonusAnswer(num1 * num2);
+
+        }
+
+
+    }, [questionSet])
 
     // Function to check the answer from the player
     const checkPlayerInput = () => {

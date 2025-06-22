@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, SelectTrigger, SelectContent, SelectValue, SelectItem } from '@/components/ui/Select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select"
 import { FaPlay } from 'react-icons/fa'
 
 const StartScreen = ({ onStartGame }) => {

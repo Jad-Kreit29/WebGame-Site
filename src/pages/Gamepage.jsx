@@ -30,15 +30,15 @@ const Gamepage = () => {
             // Splitting the expression by + or - operators
             // Adding those numbers over an array, and converts the string into a float
             const numberParts = expression.split(/([+\-])/).map(part => part.trim());
-            let firstNumber = parseFloat(parts[0]);
+            let firstNumber = parseFloat(numberParts[0]);
             let result;
 
             // Loop through every part of the expression.
             for (let i = 1; i < numberParts.length; i+=2) {
 
                 // Store the current operator and the next number of the expression (as a float)
-                const currentOperator = parts[i];
-                const nextNumber = parseFloat(parts[i + 1]);
+                const currentOperator = numberParts[i];
+                const nextNumber = parseFloat(numberParts[i + 1]);
 
                 if (currentOperator === "+") {
 
@@ -178,7 +178,7 @@ const Gamepage = () => {
     const startGame = useCallback((gameLevel, gameMode) => {
 
         // Create an array that hold our number sequence, with the size depending on the difficulty selected.
-        const questionArray = Array.from({ length: gameLevel }, generateQuestion(gameMode));
+        const questionArray = Array.from({ length: gameLevel }, () => generateQuestion(gameMode));
 
         // Convert our numbers from the array into strings to display
         const stringedNumbers = questionArray.map(numStr => ({
@@ -249,11 +249,11 @@ const Gamepage = () => {
             }, 2000);
 
         // Once we have displayed all numbers, we set the state to allow the player to recall the sequence
-        } else if (gameState === "showingNumbers" && currentNumberIndex === questionSet.length) {
+        } else if (gameState === "displaySequence" && currentNumberIndex === questionSet.length) {
 
             timeout = setTimeout(() => {
 
-                setGameState('userResponse')
+                setGameState('playerResponse')
 
             }, 1000);
 
@@ -261,7 +261,6 @@ const Gamepage = () => {
 
         // Close out our timeout.
         return () => clearTimeout(timeout);
-
 
     }, [gameState, currentNumberIndex, questionSet]);
 

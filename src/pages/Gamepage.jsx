@@ -1,9 +1,13 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const Gamepage = () => {
 
-
+    const [currentNumber, setCurrentNumber] = useState('');
+    const [currentNumberIndex, setCurrentNumberIndex] = useState(0);
+    const [questions, setQuestions] = useState([]);
 
     // Function that generates a simple number
     const generateQuestion = useCallback(() => {
@@ -21,28 +25,26 @@ const Gamepage = () => {
     // Main method
     const startGame = useCallback(() => {
 
-        for (let i = 0; i < questionArray.length; i++) {
-
+        setQuestions(questionArray);
+        
+        let timeout = setTimeout(() => {
             
+            setCurrentNumber(questionArray[currentNumberIndex])
+            setCurrentNumberIndex(prevIndex => prevIndex + 1);
 
+        }, 2000);
 
-        }
+        return () => clearTimeout(timeout);
 
-
-
-
-    }, [generateQuestion]);
+    }, []);
 
   return (
 
 
     <div>
 
-        <h1></h1>
-
-        <input>
-            
-        </input>
+        <h1>{currentNumber}</h1>
+        <Button onClick={startGame}>Start!</Button>
 
     </div>
 

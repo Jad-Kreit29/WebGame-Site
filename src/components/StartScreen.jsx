@@ -48,7 +48,7 @@ const StartScreen = ({ onStartGame }) => {
 
                     <Select>
 
-                        <SelectTrigger className='w-[200px]'>
+                        <SelectTrigger className='w-[220px]'>
 
                             <SelectValue placeholder="Select the question Type"/>
 

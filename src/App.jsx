@@ -12,8 +12,6 @@ const router = createBrowserRouter(
 
     </Route>
 
-
-
   )
 )
 

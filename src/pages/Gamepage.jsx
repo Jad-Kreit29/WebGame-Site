@@ -1,13 +1,15 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import StartScreen from '../components/StartScreen';
+import SequenceScreen from '../components/SequenceScreen';
+import ResponseScreen from '../components/ResponseScreen';
+import ResultScreen from '../components/ResultScreen';
 
 const Gamepage = () => {
 
     /*  STATES  */
     // Game States: Start, displaySequence, playerResponse, win, fail
     const [gameState, setGameState] = useState('start'); // Stages of the game
-    const [currentNumber, setCurrentNumber] = useState(''); // Currently displayed number
     const [currentNumberIndex, setCurrentNumberIndex] = useState(0); // Index of the number within the array
     const [questionSet, setQuestionSet] = useState([]); // Array of number for questions
     const [playerAnswer, setPlayerAnswer] = useState('') // Player input
@@ -113,7 +115,7 @@ const Gamepage = () => {
             playerIndex++;
 
         // If the answer is incorrect
-        } else if (!isNaN(stringedAnswer) && stringedAnswer != questionSet[playerIndex]) {
+        } else if (!isNaN(stringedAnswer) && stringedAnswer !== questionSet[playerIndex]) {
 
             // Set the state to lose
             setResult(`Incorrect! The correct answer ws ${questionSet[playerIndex]}`);
@@ -163,15 +165,26 @@ const Gamepage = () => {
                 );
             case 'displaySequence':
                 return (
-                    <SequenceDisplay />
+                    <SequenceScreen
+                        number={currentNumberIndex < questionSet.length ? questionSet[currentNumberIndex].display : null}
+                        score={highScore}
+                    />
                 );
             case 'playerResponse':
                 return (
-                    <ResponseScreen />
+                    <ResponseScreen 
+                        playerAnswer={playerAnswer}
+                        onSubmitAnswer={checkPlayerInput}
+                        score={highScore}
+                    />
                 );
             case 'result':
                 return (
-                    <ResultScreen />
+                    <ResultScreen
+                        feedback={result}
+                        onRestartGame={startGame}
+                        score={highScore}          
+                    />
                 )
             default:
                 return null;

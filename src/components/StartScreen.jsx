@@ -25,7 +25,7 @@ const StartScreen = ({ onStartGame }) => {
         <div>
             
             {/* Game Title */}
-            <h1 className="flex justify-center items-center text-6xl text-white mb-6 font-jersey">Arithmemory</h1>
+            <h1 className="flex justify-center items-center text-6xl text-white mb-6 font-jersey">ArithMemory</h1>
 
             <div className="flex flex-col items-center justify-center p-6 bg-[#F2F1F1] rounded-lg shadow-xl m-4 w-full max-w-md text-center">
                 <p className="text-[20px] font-geologica font-semibold text-black mb-8">

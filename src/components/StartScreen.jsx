@@ -29,7 +29,13 @@ const StartScreen = ({ onStartGame }) => {
                 <p className="text-[20px] font-geologica font-semibold text-black mb-8">
                     Train your brain to remember well and think fast!
                     <br /> <br />
-                    Memorize sequences of numbers and answer questions about them in the end! How much can you score?
+                    Memorize sequences of numbers and answer questions about them in the end!
+                    <br /><br />
+                    How much can you score?
+                </p>
+
+                <p className='text-[12px] font-geologica font-semibold text-black mb-8'>
+                    Default Settings: Level - Easy | Question Type - Only Digits
                 </p>
 
                 {/* Game Option Selections */}

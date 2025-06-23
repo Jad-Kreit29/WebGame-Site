@@ -42,9 +42,9 @@ const SequenceScreen = ({ number, score }) => {
                     <h1 className="flex justify-center items-center text-2xl text-white font-josefin font-semibold">Share YOUR score!</h1>
 
                     <div className='flex justify-center items-center gap-x-6 text-3xl mt-5'>
-                        <FaFacebook />
-                        <FaXTwitter />
-                        <FaInstagram />
+                        <FaFacebook className='duration-200 ease-in-out hover:text-gray-300' />
+                        <FaXTwitter className='duration-200 ease-in-out hover:text-gray-300' />
+                        <FaInstagram className='duration-200 ease-in-out hover:text-gray-300' />
 
                     </div>
 

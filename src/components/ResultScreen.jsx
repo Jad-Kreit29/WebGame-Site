@@ -8,9 +8,6 @@ const ResultScreen = ({ score, onRestartGame }) => {
   return (
     
     <>
-        {/* WIN state! */}
-        <div>
-
           {/* Game Title */}
           <h1 className="flex justify-center items-center text-6xl text-white mb-6 font-jersey">ArithMemory</h1>
 
@@ -24,7 +21,9 @@ const ResultScreen = ({ score, onRestartGame }) => {
               <br />
 
               <p className="text-[20px] font-geologica font-semibold text-black mb-8">
-                You got the sequence correct! Would you like to continue?
+                You got the sequence correct!
+                <br />
+                Would you like to continue?
               </p>
 
               <p className="text-[20px] font-geologica text-black mb-8">
@@ -48,8 +47,6 @@ const ResultScreen = ({ score, onRestartGame }) => {
           </div>
 
           <h1 className="flex justify-center items-center text-2xl text-black mb-6 font-jersey mt-3">How good is your math brain?</h1>
-
-        </div>
 
     </>
   )

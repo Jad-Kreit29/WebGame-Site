@@ -7,7 +7,7 @@ const ResultScreenFail = ({ feedback, onRestartGame, score }) => {
 
   return (
 
-    <div>
+    <>
 
         {/* Game Title */}
         <h1 className="flex justify-center items-center text-6xl text-white mb-6 font-jersey">ArithMemory</h1>
@@ -26,7 +26,7 @@ const ResultScreenFail = ({ feedback, onRestartGame, score }) => {
             </p>
 
             <p className="text-[20px] font-geologica text-black mb-8">
-              Your score is: <b>{score}</b>
+              Your score WAS: <b>{score}</b>
             </p>
 
             <button onClick={onRestartGame} className='bg-[#F7C1C1] rounded-4xl p-3 font-geologica font-bold cursor-pointer shadow-lg hover:bg-[#d5a7a7] transition duration-300 transform hover:scale-104'>
@@ -36,7 +36,7 @@ const ResultScreenFail = ({ feedback, onRestartGame, score }) => {
         </div>
 
         <h1 className="flex justify-center items-center text-2xl text-white mb-6 font-jersey">How good is your math brain?</h1>`
-    </div>
+    </>
 
   )
 }

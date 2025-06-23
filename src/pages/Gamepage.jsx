@@ -15,6 +15,7 @@ const Gamepage = () => {
     const [playerAnswer, setPlayerAnswer] = useState('') // Player input
     const [highScore, setHighScore] = useState(0); // Game's Score
     const [result, setResult] = useState(0);
+    const [playerIndex, setPlayerIndex] = useState(0);
 
     // Bonus Question States
     const [bonusQuestion, setBonusQuestion] = useState('');
@@ -143,35 +144,29 @@ const Gamepage = () => {
     // Function to check the answer from the player
     const checkPlayerInput = () => {
 
-        // Variable to store the current index in the question array
-        let playerIndex = 0;
-
-        // Convert player's input to a String
-        const stringedAnswer = parseFloat(playerAnswer);
-
-        // If the answer is correct, but we haven't reached the end of the array
-        if (!isNaN(stringedAnswer) && stringedAnswer === questionSet[playerIndex] && playerIndex < questionSet.length) {
-
-            // Increment the index
-            playerIndex++;
-
-        // If the answer is incorrect
-        } else if (!isNaN(stringedAnswer) && stringedAnswer !== questionSet[playerIndex]) {
-
-            // Set the state to lose
-            setResult(`Incorrect! The correct answer ws ${questionSet[playerIndex]}`);
-            setGameState("result");
-
         // If we reached the end of the array
-        } else if (!isNaN(stringedAnswer) && stringedAnswer === questionSet[playerIndex] && playerIndex === questionSet.length) {
+        if (playerIndex === questionSet.length) {
 
             // Set the state to win and increase high score
             setResult("Correct!");
             setGameState("result");
             setHighScore(prevHighScore => prevHighScore + 1);
 
-        }
+        // If the answer is correct, but we haven't reached the end of the array
+        } else if (!isNaN(playerAnswer) && playerAnswer === questionSet[playerIndex].display && playerIndex < questionSet.length) {
 
+            // Increment the index
+            setPlayerIndex(playerIndex + 1);
+
+        // If the answer is incorrect
+        } else if (!isNaN(playerAnswer) && playerAnswer !== questionSet[playerIndex].display) {
+
+            // Set the state to lose
+            setResult(`Incorrect! The correct answer was ${questionSet[playerIndex]}`);
+            setGameState("result");
+
+        }
+        
     };
 
     // MAIN FUNCTION
@@ -251,7 +246,7 @@ const Gamepage = () => {
 
         // Once we have displayed all numbers, we set the state to allow the player to recall the sequence
         } else if (gameState === "displaySequence" && currentNumberIndex === questionSet.length) {
-            
+
             setGameState('playerResponse')
         }
 

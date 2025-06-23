@@ -17,6 +17,7 @@ const Gamepage = () => {
     const [highScore, setHighScore] = useState(0); // Game's Score
     const [result, setResult] = useState(0);
     const [playerIndex, setPlayerIndex] = useState(0);
+    const [inputErrorMessage, setInputErrorMessage] = useState('');
 
     /*  FUNCTIONS  */
 
@@ -114,8 +115,11 @@ const Gamepage = () => {
 
         // Check if the player input is not valid!
         if (isNaN(parsedPlayerAnswer)) {
-            
+            setInputErrorMessage("Please enter a valid number or expression result.");
+            return;
         }
+
+        setInputErrorMessage('');
         
         // If the answer is correct
         if (parsedPlayerAnswer === correctAnswer) {
@@ -158,6 +162,8 @@ const Gamepage = () => {
         setCurrentNumberIndex(0);
         setPlayerAnswer('');
         setPlayerIndex(0);
+        setInputErrorMessage('');
+        
 
     }, [generateQuestion]);
 
@@ -185,6 +191,7 @@ const Gamepage = () => {
             score={highScore}
             playerIndex={playerIndex} // Pass current player index
             sequenceLength={questionSet.length} // Pass total length of sequence
+            inputErrorMessage={inputErrorMessage}
           />
         );
       case 'result':

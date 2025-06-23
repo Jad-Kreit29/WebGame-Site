@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 
 
 
-const ResponseScreen = ({ setPlayerAnswer, playerAnswer, onSubmitAnswer, score, playerIndex, sequenceLength }) => {
+const ResponseScreen = ({ setPlayerAnswer, playerAnswer, onSubmitAnswer, score, playerIndex, sequenceLength, inputErrorMessage }) => {
 
   document.body.style = 'background: #8833B2;';
   return (
@@ -48,6 +48,11 @@ const ResponseScreen = ({ setPlayerAnswer, playerAnswer, onSubmitAnswer, score, 
               Submit
             </Button>
           </div>
+          {inputErrorMessage && (
+            <p className="text-red-600 mt-2 font-semibold text-lg text-center bg-white p-2 rounded-md shadow-md">
+              {inputErrorMessage}
+            </p>
+          )}
         </div>
       </div>
 

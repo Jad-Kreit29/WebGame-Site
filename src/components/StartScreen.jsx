@@ -35,7 +35,7 @@ const StartScreen = ({ onStartGame }) => {
                 </p>
 
                 <p className='text-[12px] font-geologica font-semibold text-black mb-8'>
-                    Default Settings: Level - Easy | Question Type - Only Digits
+                    Default Settings: Level - Easy | Question Type - Digits & Expressions
                 </p>
 
                 {/* Game Option Selections */}

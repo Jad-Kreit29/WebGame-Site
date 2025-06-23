@@ -251,13 +251,8 @@ const Gamepage = () => {
 
         // Once we have displayed all numbers, we set the state to allow the player to recall the sequence
         } else if (gameState === "displaySequence" && currentNumberIndex === questionSet.length) {
-
-            timeout = setTimeout(() => {
-
-                setGameState('playerResponse')
-
-            }, 1000);
-
+            
+            setGameState('playerResponse')
         }
 
         // Close out our timeout.

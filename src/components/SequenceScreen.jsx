@@ -5,6 +5,8 @@ import { FaXTwitter } from 'react-icons/fa6';
 
 const SequenceScreen = ({ number, score }) => {
 
+    document.body.style = 'background: #FFB800;';
+
     return (
         <>
 

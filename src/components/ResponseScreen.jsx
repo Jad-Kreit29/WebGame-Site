@@ -51,17 +51,23 @@ const ResponseScreen = ({ setPlayerAnswer, playerAnswer, onSubmitAnswer, score, 
         </div>
       </div>
 
-      {/* Bottom Footer */}
-      <div className='absolute inset-x-0 bottom-0 bg-black w-full'>
-        <div className='py-6 text-white'>
-          <h1 className="flex justify-center items-center text-2xl text-white font-josefin font-semibold">Share YOUR score!</h1>
-          <div className='flex justify-center items-center gap-x-6 text-3xl mt-5'>
-            <span>Facebook</span>
-            <span>X (Twitter)</span>
-            <span>Instagram</span>
-          </div>
+        {/* Bottom Footer */}
+        <div className='absolute inset-x-0 bottom-0 bg-black w-full'>
+            
+            <div className='py-6 text-white'>
+
+                <h1 className="flex justify-center items-center text-2xl text-white font-josefin font-semibold">Share YOUR score!</h1>
+
+                <div className='flex justify-center items-center gap-x-6 text-3xl mt-5'>
+                    <FaFacebook />
+                    <FaXTwitter />
+                    <FaInstagram />
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
     </>
   );
 };

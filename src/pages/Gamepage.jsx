@@ -4,11 +4,12 @@ import StartScreen from '../components/StartScreen';
 import SequenceScreen from '../components/SequenceScreen';
 import ResponseScreen from '../components/ResponseScreen';
 import ResultScreen from '../components/ResultScreen';
+import ResultScreenFail from '../components/ResultScreenFail';
 
 const Gamepage = () => {
 
     /*  STATES  */
-    // Game States: Start, displaySequence, playerResponse, win, fail
+    // Game States: Start, displaySequence, playerResponse, result, result_fail
     const [gameState, setGameState] = useState('start'); // Stages of the game
     const [currentNumberIndex, setCurrentNumberIndex] = useState(0); // Index of the number within the array
     const [questionSet, setQuestionSet] = useState([]); // Array of number for questions
@@ -16,11 +17,6 @@ const Gamepage = () => {
     const [highScore, setHighScore] = useState(0); // Game's Score
     const [result, setResult] = useState(0);
     const [playerIndex, setPlayerIndex] = useState(0);
-
-    // Bonus Question States
-    const [bonusQuestion, setBonusQuestion] = useState('');
-    const [bonusAnswer, setBonusAnswer] = useState('');
-
 
     /*  FUNCTIONS  */
 
@@ -109,44 +105,10 @@ const Gamepage = () => {
         
     }, [questionSet]);
 
-    // Function for generating a BONUS question (optional)
-    const generateBonusQuestion = useCallback(() => {
-
-        let questionType = Math.floor(Math.random() * 3);
-
-        let index1 = Math.floor(Math.random() * questionSet.length);
-        let index2;
-
-        do {
-            index2 = Math.floor(Math.random() * questionSet.length);
-        } while (index1 === index2);
-
-        const num1 = questionSet[index1];
-        const num2 = questionSet[index2];
-
-        // Additon
-        if (questionType === 0) {
-
-            setBonusQuestion(`What is digit #${index1 + 1} plus digit #${index2 + 1}?`);
-            setBonusAnswer(num1 + num2);
-
-        } else if (questionType === 1) {
-
-            setBonusQuestion(`What is digit #${index1 + 1} minus digit #${index2 + 1}?`);
-            setBonusAnswer(num1 - num2);
-
-        } else if (questionType === 2) {
-
-            setBonusQuestion(`What is digit #${index1 + 1} times digit #${index2 + 1}?`);
-            setBonusAnswer(num1 * num2);
-
-        }
-
-
-    }, [questionSet])
-
     // Function to check the answer from the player
     const checkPlayerInput = () => {
+
+        // Convert the player input to a digit
         const parsedPlayerAnswer = parseFloat(playerAnswer);
         const correctAnswer = questionSet[playerIndex].value;
 
@@ -168,10 +130,11 @@ const Gamepage = () => {
             setPlayerIndex(prevIndex => prevIndex + 1);
             setPlayerAnswer(''); // Clear input for next question
         }
+        
         } else {
         // If the answer is incorrect
         setResult(`Incorrect! The correct answer was ${correctAnswer}.`);
-        setGameState("result");
+        setGameState("result_fail");
         }
     };
 
@@ -193,8 +156,6 @@ const Gamepage = () => {
         setCurrentNumberIndex(0);
         setPlayerAnswer('');
         setPlayerIndex(0);
-        setHighScore(0);
-
 
     }, [generateQuestion]);
 
@@ -202,7 +163,6 @@ const Gamepage = () => {
     const renderGameScreen = () => {
     switch(gameState) {
       case 'start':
-        document.body.style.background = '#FFB800';
         return (
           <StartScreen onStartGame={startGame} />
         );
@@ -215,7 +175,6 @@ const Gamepage = () => {
           />
         );
       case 'playerResponse':
-        document.body.style.background = '#8833B2'; // Maintain consistent background as per original
         return (
           <ResponseScreen
             playerAnswer={playerAnswer}
@@ -227,14 +186,24 @@ const Gamepage = () => {
           />
         );
       case 'result':
-        document.body.style.background = '#8833B2'; // Maintain consistent background as per original
         return (
           <ResultScreen
-            feedback={result}
             onRestartGame={() => setGameState('start')} // Restart by going to start screen
             score={highScore}
           />
         );
+      case 'result_fail':
+        return (
+            <ResultScreenFail 
+            feedback={result}
+            onRestartGame={() => {
+                setGameState('start');
+                setHighScore(0);
+            }} // Restart by going to start screen
+            score={highScore}
+            />
+        )
+
       default:
         return null;
     }

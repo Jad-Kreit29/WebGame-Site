@@ -34,6 +34,10 @@ const Gamepage = () => {
             let firstNumber = parseFloat(numberParts[0]);
             let result;
 
+            if (!isNaN(parseFloat(expression)) && isFinite(expression) && !expression.includes('+') && !expression.includes('-')) {
+                return parseFloat(expression); // This handles single digits correctly
+            }
+
             // Loop through every part of the expression.
             for (let i = 1; i < numberParts.length; i+=2) {
 
@@ -143,30 +147,32 @@ const Gamepage = () => {
 
     // Function to check the answer from the player
     const checkPlayerInput = () => {
+        const parsedPlayerAnswer = parseFloat(playerAnswer);
+        const correctAnswer = questionSet[playerIndex].value;
 
-        // If we reached the end of the array
-        if (playerIndex === questionSet.length) {
-
-            // Set the state to win and increase high score
-            setResult("Correct!");
-            setGameState("result");
-            setHighScore(prevHighScore => prevHighScore + 1);
-
-        // If the answer is correct, but we haven't reached the end of the array
-        } else if (!isNaN(playerAnswer) && playerAnswer === questionSet[playerIndex].display && playerIndex < questionSet.length) {
-
-            // Increment the index
-            setPlayerIndex(playerIndex + 1);
-
-        // If the answer is incorrect
-        } else if (!isNaN(playerAnswer) && playerAnswer !== questionSet[playerIndex].display) {
-
-            // Set the state to lose
-            setResult(`Incorrect! The correct answer was ${questionSet[playerIndex]}`);
-            setGameState("result");
-
+        if (isNaN(parsedPlayerAnswer)) {
+        setResult("Please enter a valid number!");
+        setGameState("result");
+        return;
         }
-        
+
+        if (parsedPlayerAnswer === correctAnswer) {
+        // If the answer is correct
+        if (playerIndex === questionSet.length - 1) {
+            // If it's the last number in the sequence
+            setResult("Correct!");
+            setHighScore(prevHighScore => prevHighScore + 1);
+            setGameState("result");
+        } else {
+            // If there are more numbers to answer
+            setPlayerIndex(prevIndex => prevIndex + 1);
+            setPlayerAnswer(''); // Clear input for next question
+        }
+        } else {
+        // If the answer is incorrect
+        setResult(`Incorrect! The correct answer was ${correctAnswer}.`);
+        setGameState("result");
+        }
     };
 
     // MAIN FUNCTION
@@ -186,6 +192,7 @@ const Gamepage = () => {
         setQuestionSet(stringedNumbers);
         setCurrentNumberIndex(0);
         setPlayerAnswer('');
+        setPlayerIndex(0);
         setHighScore(0);
 
 
@@ -193,41 +200,45 @@ const Gamepage = () => {
 
     // Render our screen depending on the game state
     const renderGameScreen = () => {
-
-        switch(gameState) {
-            case 'start':
-                return (
-                    <StartScreen onStartGame={startGame} />
-                );
-            case 'displaySequence':
-                return (
-                    <SequenceScreen
-                        number={currentNumberIndex < questionSet.length ? questionSet[currentNumberIndex].display : null}
-                        score={highScore}
-                    />
-                );
-            case 'playerResponse':
-                return (
-                    <ResponseScreen 
-                        playerAnswer={playerAnswer}
-                        setPlayerAnswer={(e) => setPlayerAnswer(e.target.value)}
-                        onSubmitAnswer={checkPlayerInput}
-                        score={highScore}
-                    />
-                );
-            case 'result':
-                return (
-                    <ResultScreen
-                        feedback={result}
-                        onRestartGame={startGame}
-                        score={highScore}          
-                    />
-                )
-            default:
-                return null;
-        }
-
-    };
+    switch(gameState) {
+      case 'start':
+        document.body.style.background = '#FFB800';
+        return (
+          <StartScreen onStartGame={startGame} />
+        );
+      case 'displaySequence':
+        document.body.style.background = '#8833B2'; // Maintain consistent background as per original
+        return (
+          <SequenceScreen
+            number={currentNumberIndex < questionSet.length ? questionSet[currentNumberIndex].display : null}
+            score={highScore}
+          />
+        );
+      case 'playerResponse':
+        document.body.style.background = '#8833B2'; // Maintain consistent background as per original
+        return (
+          <ResponseScreen
+            playerAnswer={playerAnswer}
+            setPlayerAnswer={(e) => setPlayerAnswer(e.target.value)}
+            onSubmitAnswer={checkPlayerInput}
+            score={highScore}
+            playerIndex={playerIndex} // Pass current player index
+            sequenceLength={questionSet.length} // Pass total length of sequence
+          />
+        );
+      case 'result':
+        document.body.style.background = '#8833B2'; // Maintain consistent background as per original
+        return (
+          <ResultScreen
+            feedback={result}
+            onRestartGame={() => setGameState('start')} // Restart by going to start screen
+            score={highScore}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
     // Using React Hook to display our number sequence from our array
     useEffect(() => {

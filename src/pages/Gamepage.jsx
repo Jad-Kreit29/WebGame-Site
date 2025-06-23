@@ -112,29 +112,31 @@ const Gamepage = () => {
         const parsedPlayerAnswer = parseFloat(playerAnswer);
         const correctAnswer = questionSet[playerIndex].value;
 
+        // Check if the player input is not valid!
         if (isNaN(parsedPlayerAnswer)) {
-        setResult("Please enter a valid number!");
-        setGameState("result");
-        return;
-        }
-
-        if (parsedPlayerAnswer === correctAnswer) {
-        // If the answer is correct
-        if (playerIndex === questionSet.length - 1) {
-            // If it's the last number in the sequence
-            setResult("Correct!");
-            setHighScore(prevHighScore => prevHighScore + 1);
-            setGameState("result");
-        } else {
-            // If there are more numbers to answer
-            setPlayerIndex(prevIndex => prevIndex + 1);
-            setPlayerAnswer(''); // Clear input for next question
+            
         }
         
+        // If the answer is correct
+        if (parsedPlayerAnswer === correctAnswer) {
+
+            // If it's the last number in the sequence
+            if (playerIndex === questionSet.length - 1) {
+                setResult("Correct!");
+                setHighScore(prevHighScore => prevHighScore + 1);
+                setGameState("result");
+            } else {
+                // If there are more numbers to answer
+                setPlayerIndex(prevIndex => prevIndex + 1);
+                setPlayerAnswer(''); // Clear input for next question
+            }
+
         } else {
-        // If the answer is incorrect
-        setResult(`Incorrect! The correct answer was ${correctAnswer}.`);
-        setGameState("result_fail");
+
+            // If the answer is incorrect
+            setResult(`Incorrect! The correct answer was ${correctAnswer}.`);
+            setGameState("result_fail");
+
         }
     };
 

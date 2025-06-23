@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 
 const ResponseScreen = ({ playerAnswer, setPlayerAnswer, onSubmitAnswer, score }) => {
 
-    document.body.style = 'background: #7413A5;';
+    document.body.style = 'background: #8833B2;';
 
     return (
         <>
@@ -21,7 +21,7 @@ const ResponseScreen = ({ playerAnswer, setPlayerAnswer, onSubmitAnswer, score }
             <div className="relative flex flex-col items-center justify-center h-full w-full bg-[#FFB800] shadow-xl p-6">
 
                 {/* High Score Container */}
-                <div className="absolute top-4 right-6 text-xl font-bold text-[#151515]">
+                <div className="absolute top-4 right-6 text-xl font-geologica font-bold text-[#151515]">
                     High Score: <span className="text-[#6494AA]">{score}</span>
                 </div>
 

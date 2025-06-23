@@ -215,6 +215,7 @@ const Gamepage = () => {
                 return (
                     <ResponseScreen 
                         playerAnswer={playerAnswer}
+                        setPlayerAnswer={(e) => setPlayerAnswer(e.target.value)}
                         onSubmitAnswer={checkPlayerInput}
                         score={highScore}
                     />

@@ -5,7 +5,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-const ResponseScreen = ({ playerAnswer, setPlayerAnswer, onSubmitAnswer, score }) => {
+const ResponseScreen = ({ setPlayerAnswer, playerAnswer, onSubmitAnswer, score }) => {
 
     document.body.style = 'background: #8833B2;';
 
@@ -30,10 +30,10 @@ const ResponseScreen = ({ playerAnswer, setPlayerAnswer, onSubmitAnswer, score }
                     <h2 className="text-3xl font-bold text-white mb-4 text-center">Your Answer:</h2>
                     <div className='flex w-full max-w-sm items-center gap-2'>
                         <Input
-                            type="number" // Changed to number type for math games
+                            type="number"
                             placeholder="Enter digit or expression result"
                             value={playerAnswer}
-                            onChange={(e) => setPlayerAnswer(e.target.value)}
+                            onChange={setPlayerAnswer}
                             className="flex-grow p-4 text-center text-3xl font-bold rounded-xl border-2 border-blue-400 focus:outline-none focus:border-blue-700"
                         />
                         <Button

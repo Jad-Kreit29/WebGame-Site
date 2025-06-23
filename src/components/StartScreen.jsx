@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from '@/components/ui/select'
-import { FaPlay } from 'react-icons/fa'
-
 
 const StartScreen = ({ onStartGame }) => {
     const [gameLevel, setGameLevel] = useState(3); // Internal state for level
